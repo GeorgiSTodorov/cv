@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Georgi Todorov — Senior Frontend Developer",
+  title: "Georgi Todorov — Senior Front-end Developer",
   description:
-    "Senior Frontend developer portfolio showcasing skills and interests.",
+    "Senior Front-end developer portfolio showcasing skills and interests.",
 };
 
 export default function RootLayout({

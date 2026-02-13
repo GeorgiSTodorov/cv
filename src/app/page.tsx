@@ -42,7 +42,7 @@ function DownloadIcon() {
 
 export default function Home() {
   return (
-    <div className="mx-auto flex min-h-svh max-w-5xl flex-col px-6">
+    <div className="mx-auto flex min-h-svh max-w-6xl flex-col px-6">
       {/* Header */}
       <header className="flex items-center justify-between py-10">
         <div>
@@ -84,154 +84,162 @@ export default function Home() {
       {/* Body */}
       <div className="flex-1 pb-16">
         <main className="space-y-10">
-          {/* Intro */}
-          <section className="glass-card animate-in delay-1">
-            <div className="flex gap-6 max-sm:flex-col max-sm:items-center">
-              <div className="shrink-0">
-                <Image
-                  src={profile.photo}
-                  alt={profile.name}
-                  width={120}
-                  height={120}
-                  className="profile-photo rounded-full object-cover"
-                  priority
-                />
-              </div>
-              <div className="max-sm:text-center">
-                <p className="leading-relaxed text-foreground/70">
-                  {profile.intro}
-                </p>
-                <div className="mt-4">
-                  <a href={profile.cvUrl} download className="download-btn">
-                    <DownloadIcon />
-                    Download CV
-                  </a>
+          {/* Two-column layout */}
+          <div className="flex gap-10 max-lg:flex-col animate-in delay-1">
+            {/* Main: Intro, Experience, Education */}
+            <div className="flex flex-col gap-24 lg:basis-3/5 lg:grow">
+              {/* Intro */}
+              <section className="glass-card">
+                <div className="flex gap-6 max-sm:flex-col max-sm:items-center">
+                  <div className="shrink-0 flex flex-col justify-between">
+                    <Image
+                      src={profile.photo}
+                      alt={profile.name}
+                      width={160}
+                      height={160}
+                      className="profile-photo rounded-full object-cover"
+                      priority
+                    />
+                    <div className="mt-4">
+                      <a href={profile.cvUrl} download className="download-btn">
+                        <DownloadIcon />
+                        Download CV
+                      </a>
+                    </div>
+                  </div>
+                  <div className="flex flex-col justify-between max-sm:text-center">
+                    <p className="leading-relaxed text-foreground/70">
+                      {profile.intro}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </section>
+              </section>
+              {/* Experience */}
+              <section className="glass-card">
+                <h2 className="mb-6 text-lg font-semibold tracking-tight">
+                  Experience
+                </h2>
+                <div className="space-y-8">
+                  {profile.experience.map((job) => (
+                    <div key={`${job.company}-${job.role}`} className="timeline-item">
+                      <div className="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
+                        <h3 className="font-medium">
+                          {job.role}{" "}
+                          <span className="text-foreground/40">
+                            @{" "}
+                            {job.companyUrl ? (
+                              <a
+                                href={job.companyUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="underline underline-offset-4 transition-colors hover:text-accent"
+                              >
+                                {job.company}
+                              </a>
+                            ) : (
+                              job.company
+                            )}
+                          </span>
+                        </h3>
+                        <span className="shrink-0 text-sm text-foreground/40">
+                          {job.period}
+                        </span>
+                      </div>
+                      <div className="mt-2 space-y-1 text-sm leading-relaxed text-foreground/60">
+                        {job.description.map((item, i) => (
+                          <p key={i}>{item}</p>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
 
-          {/* Technical Skills */}
-          <section className="glass-card animate-in delay-2">
-            <h2 className="mb-5 text-lg font-semibold tracking-tight">
-              Technical Skills
-            </h2>
-            <div className="flex flex-wrap gap-3">
-              {profile.technicalSkills.map((skill) => (
-                <span key={skill.name} className="glow-pill">
-                  <TechIcon name={skill.icon} />
-                  {skill.name}
-                </span>
-              ))}
+              {/* Education */}
+              <section className="glass-card">
+                <h2 className="mb-6 text-lg font-semibold tracking-tight">
+                  Education
+                </h2>
+                <div className="space-y-4">
+                  {profile.education.map((edu) => (
+                    <div key={`${edu.school}-${edu.degree}`} className="timeline-item">
+                      <div className="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
+                        <h3 className="font-medium">{edu.school}</h3>
+                        <span className="shrink-0 text-sm text-foreground/40">
+                          {edu.period}
+                        </span>
+                      </div>
+                      <p className="mt-1 text-sm text-foreground/50">{edu.degree}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
             </div>
-          </section>
 
-          {/* Personal Skills */}
-          <section className="glass-card animate-in delay-3">
-            <h2 className="mb-5 text-lg font-semibold tracking-tight">
-              Personal Skills
-            </h2>
-            <div className="flex flex-wrap gap-3">
-              {profile.personalSkills.map((skill) => (
-                <span key={skill.name} className="glow-pill">
-                  <PersonalIcon name={skill.icon} />
-                  {skill.name}
-                </span>
-              ))}
-            </div>
-          </section>
-
-          {/* Interests */}
-          <section className="glass-card animate-in delay-4">
-            <h2 className="mb-5 text-lg font-semibold tracking-tight">
-              Interests
-            </h2>
-            <div className="flex flex-wrap gap-3">
-              {profile.interests.map((interest) => (
-                <span key={interest.name} className="glow-pill">
-                  <InterestIcon name={interest.icon} />
-                  {interest.name}
-                </span>
-              ))}
-            </div>
-          </section>
-
-          {/* Languages */}
-          <section className="glass-card animate-in delay-5">
-            <h2 className="mb-5 text-lg font-semibold tracking-tight">
-              Languages
-            </h2>
-            <div className="flex flex-wrap gap-3">
-              {profile.languages.map((lang) => (
-                <span key={lang.name} className="glow-pill">
-                  <span className="font-medium">{lang.name}</span>
-                  <span className="text-foreground/40">·</span>
-                  <span className="text-foreground/50">{lang.level}</span>
-                </span>
-              ))}
-            </div>
-          </section>
-
-          {/* Experience */}
-          <section className="glass-card animate-in delay-6">
-            <h2 className="mb-6 text-lg font-semibold tracking-tight">
-              Experience
-            </h2>
-            <div className="space-y-8">
-              {profile.experience.map((job) => (
-                <div key={`${job.company}-${job.role}`} className="timeline-item">
-                  <div className="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
-                    <h3 className="font-medium">
-                      {job.role}{" "}
-                      <span className="text-foreground/40">
-                        @{" "}
-                        {job.companyUrl ? (
-                          <a
-                            href={job.companyUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="underline underline-offset-4 transition-colors hover:text-accent"
-                          >
-                            {job.company}
-                          </a>
-                        ) : (
-                          job.company
-                        )}
-                      </span>
-                    </h3>
-                    <span className="shrink-0 text-sm text-foreground/40">
-                      {job.period}
+            {/* Sidebar: Skills, Interests, Languages */}
+            <div className="flex flex-col gap-5 text-xs lg:basis-2/5 lg:shrink-0">
+              {/* Technical Skills */}
+              <section className="glass-card-sm">
+                <h2 className="mb-4 text-base font-semibold tracking-tight">
+                  Technical Skills
+                </h2>
+                <div className="flex flex-wrap gap-2.5">
+                  {profile.technicalSkills.map((skill) => (
+                    <span key={skill.name} className="glow-pill">
+                      <TechIcon name={skill.icon} />
+                      {skill.name}
                     </span>
-                  </div>
-                  <div className="mt-2 space-y-1 text-sm leading-relaxed text-foreground/60">
-                    {job.description.map((item, i) => (
-                      <p key={i}>{item}</p>
-                    ))}
-                  </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </section>
+              </section>
 
-          {/* Education */}
-          <section className="glass-card animate-in delay-7">
-            <h2 className="mb-6 text-lg font-semibold tracking-tight">
-              Education
-            </h2>
-            <div className="space-y-4">
-              {profile.education.map((edu) => (
-                <div key={`${edu.school}-${edu.degree}`} className="timeline-item">
-                  <div className="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
-                    <h3 className="font-medium">{edu.degree}</h3>
-                    <span className="shrink-0 text-sm text-foreground/40">
-                      {edu.period}
+              {/* Personal Skills */}
+              <section className="glass-card-sm">
+                <h2 className="mb-4 text-base font-semibold tracking-tight">
+                  Personal Skills
+                </h2>
+                <div className="flex flex-wrap gap-2.5">
+                  {profile.personalSkills.map((skill) => (
+                    <span key={skill.name} className="glow-pill">
+                      <PersonalIcon name={skill.icon} />
+                      {skill.name}
                     </span>
-                  </div>
-                  <p className="mt-1 text-sm text-foreground/50">{edu.school}</p>
+                  ))}
                 </div>
-              ))}
+              </section>
+
+              {/* Interests */}
+              <section className="glass-card-sm">
+                <h2 className="mb-4 text-base font-semibold tracking-tight">
+                  Interests
+                </h2>
+                <div className="flex flex-wrap gap-2.5">
+                  {profile.interests.map((interest) => (
+                    <span key={interest.name} className="glow-pill">
+                      <InterestIcon name={interest.icon} />
+                      {interest.name}
+                    </span>
+                  ))}
+                </div>
+              </section>
+
+              {/* Languages */}
+              <section className="glass-card-sm">
+                <h2 className="mb-4 text-base font-semibold tracking-tight">
+                  Languages
+                </h2>
+                <div className="flex flex-wrap gap-2.5">
+                  {profile.languages.map((lang) => (
+                    <span key={lang.name} className="glow-pill">
+                      <span className="font-medium">{lang.name}</span>
+                      <span className="text-foreground/40">·</span>
+                      <span className="text-foreground/50">{lang.level}</span>
+                    </span>
+                  ))}
+                </div>
+              </section>
             </div>
-          </section>
+          </div>
         </main>
       </div>
 

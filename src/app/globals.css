@@ -68,6 +68,20 @@ body::before {
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
+.glass-card-sm {
+  background: color-mix(in srgb, var(--foreground) 3%, transparent);
+  border: 1px solid color-mix(in srgb, var(--foreground) 8%, transparent);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.glass-card-sm:hover {
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  box-shadow: 0 0 30px var(--glow);
+}
+
 .glass-card:hover {
   border-color: color-mix(in srgb, var(--accent) 30%, transparent);
   box-shadow: 0 0 30px var(--glow);
