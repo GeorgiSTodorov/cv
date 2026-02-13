@@ -177,7 +177,7 @@ export default function Home() {
             </div>
 
             {/* Sidebar: Skills, Interests, Languages */}
-            <div className="flex flex-col gap-5 text-xs lg:basis-2/5 lg:shrink-0">
+            <div className="flex flex-col justify-between text-xs lg:basis-2/5 lg:shrink-0">
               {/* Technical Skills */}
               <section className="glass-card-sm">
                 <h2 className="mb-4 text-base font-semibold tracking-tight">
